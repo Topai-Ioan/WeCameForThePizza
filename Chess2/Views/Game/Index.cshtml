@@ -1,186 +1,89 @@
-﻿@{
-    ViewData["Title"] = "Chess Game";
-}
+﻿
+<button class="btn btn-primary" onclick="requestMatch()">New Match</button>
+<button class="btn btn-primary" name="Refresh" onclick="refreshMatch()">Refresh</button>
+<input class="form-control" type="text" name="IdDisplay"/>
 
-<h1>@ViewData["Title"]</h1>
-
-
-
-<style type="text/css">
-	table {
-		border-collapse: collapse;
-	}
-
-	td {
-		width: 50px;
-		height: 50px;
-		text-align: center;
-		vertical-align: middle;
-		border: 1px solid black;
-		font-size: 40px;
-		font-weight: bold;
-	}
-
-	.white {
-		background-color: white;
-	}
-
-	.black {
-		background-color: grey;
-	}
-</style>
-
-<table>
-	<tbody>
-		<tr>
-			<td class="white">&#9823;</td>
-			<td class="black"></td>
-			<td class="white"></td>
-			<td class="black"></td>
-			<td class="white"></td>
-			<td class="black"></td>
-			<td class="white"></td>
-			<td class="black">&#9823;</td>
-		</tr>
-		<tr>
-			<td class="black">&#9823;</td>
-			<td class="white"></td>
-			<td class="black"></td>
-			<td class="white"></td>
-			<td class="black"></td>
-			<td class="white"></td>
-			<td class="black"></td>
-			<td class="white">&#9823;</td>
-		</tr>
-		<tr>
-			<td class="white"></td>
-			<td class="black"></td>
-			<td class="white"></td>
-			<td class="black"></td>
-			<td class="white"></td>
-			<td class="black"></td>
-			<td class="white"></td>
-			<td class="black"></td>
-		</tr>
-		<tr>
-			<td class="black"></td>
-			<td class="white"></td>
-			<td class="black"></td>
-			<td class="white"></td>
-			<td class="black"></td>
-			<td class="white"></td>
-			<td class="black"></td>
-			<td class="white"></td>
-		</tr>
-		<tr>
-			<td class="white"></td>
-			<td class="black"></td>
-			<td class="white"></td>
-			<td class="black"></td>
-			<td class="white"></td>
-			<td class="black"></td>
-			<td class="white"></td>
-			<td class="black"></td>
-		</tr>
-		<tr>
-			<td class="black"></td>
-			<td class="white"></td>
-			<td class="black"></td>
-			<td class="white"></td>
-			<td class="black"></td>
-			<td class="white"></td>
-			<td class="black"></td>
-			<td class="white"></td>
-		</tr>
-		<tr>
-			<td class="white">&#9817;</td>
-			<td class="black"></td>
-			<td class="white"></td>
-			<td class="black"></td>
-			<td class="white"></td>
-			<td class="black"></td>
-			<td class="white"></td>
-			<td class="black">&#9817;</td>
-		</tr>
-		<tr>
-			<td class="black">&#9817;</td>
-			<td class="white"></td>
-			<td class="black"></td>
-			<td class="white"></td>
-			<td class="black"></td>
-			<td class="white"></td>
-			<td class="black"></td>
-			<td class="white">&#9817;</td>
-		</tr>
-	</tbody>
-</table>
-
-<script type="text/javascript">
-	// Code to add functionality to the pawns
-	const pawns = document.querySelectorAll('.white, .black');
-	let selectedPawn = null;
-
-	pawns.forEach(pawn => {
-		pawn.addEventListener('click', function () {
-			// Check if the pawn is already selected
-			if (selectedPawn === pawn) {
-				// Deselect the pawn
-				selectedPawn.classList.remove('selected');
-				selectedPawn = null;
-			} else if (!selectedPawn) {
-				// Select the pawn
-				selectedPawn = pawn;
-				selectedPawn.classList.add('selected');
-			} else {
-				// Move the pawn
-				const from = selectedPawn.parentNode;
-				const to = pawn.parentNode;
-
-				// Check if the move is valid
-				if (isValidMove(from, to)) {
-					to.replaceChild(selectedPawn, pawn);
-					selectedPawn.classList.remove('selected');
-					selectedPawn = null;
-				} else {
-					alert('Invalid move!');
-				}
-			}
-		});
-	});
-
-	function isValidMove(from, to) {
-		// Get the row and column indices of the from and to cells
-		const fromRow = from.parentNode.rowIndex;
-		const fromCol = from.cellIndex;
-		const toRow = to.parentNode.rowIndex;
-		const toCol = to.cellIndex;
-
-		// Check if the move is valid for a white pawn
-		if (selectedPawn.classList.contains('white')) {
-			if (fromCol === toCol && fromRow - toRow === 1 && !to.firstChild) {
-				return true;
-			} else if (Math.abs(fromCol - toCol) === 1 && fromRow - toRow === 1 && to.firstChild && to.firstChild.classList.contains('black')) {
-				return true;
-			}
-		}
-
-		// Check if the move is valid for a black pawn
-		if (selectedPawn.classList.contains('black')) {
-			if (fromCol === toCol && toRow - fromRow === 1 && !to.firstChild) {
-				return true;
-			} else if (Math.abs(fromCol - toCol) === 1 && toRow - fromRow === 1 && to.firstChild && to.firstChild.classList.contains('white')) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-</script>
-
-
-
-
-@section Scripts {
-    <script src="~/js/game.js"></script>
-}
+<div class="boardContainer">
+	<div class="chessBoard" name="Board">
+		<div class="tableRow" data-row="0">
+			<div class="WSquare" data-column="0"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="1"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="2"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="3"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="4"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="5"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="6"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="7"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+		</div>
+		<div class="tableRow" data-row="1">
+			<div class="BSquare" data-column="0"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="1"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="2"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="3"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="4"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="5"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="6"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="7"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+		</div>
+		<div class="tableRow" data-row="2">
+			<div class="WSquare" data-column="0"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="1"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="2"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="3"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="4"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="5"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="6"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="7"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+		</div>
+		<div class="tableRow" data-row="3">
+			<div class="BSquare" data-column="0"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="1"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="2"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="3"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="4"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="5"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="6"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="7"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+		</div>
+		<div class="tableRow" data-row="4">
+			<div class="WSquare" data-column="0"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="1"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="2"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="3"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="4"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="5"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="6"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="7"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+		</div>
+		<div class="tableRow" data-row="5">
+			<div class="BSquare" data-column="0"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="1"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="2"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="3"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="4"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="5"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="6"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="7"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+		</div>
+		<div class="tableRow" data-row="6">
+			<div class="WSquare" data-column="0"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="1"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="2"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="3"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="4"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="5"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="6"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="7"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+		</div>
+		<div class="tableRow" data-row="7">
+			<div class="BSquare" data-column="0"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="1"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="2"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="3"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="4"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="5"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="BSquare" data-column="6"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+			<div class="WSquare" data-column="7"><div onclick="squareClicked(this)" class="piece" id=""></div></div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,115 @@
+.boardContainer {
+    width: 85vw;
+}
+
+.chessBoard {
+    margin-left: 15vw;
+    width: 36.4vw;
+    border: solid;
+    border-color: black;
+    border-width: 5px;
+    resize: none;
+    overflow: auto;
+    display: table;
+}
+
+#clicked {
+    background:green;
+}
+
+.tableRow {
+    float: left;
+    display: table-row;
+}
+
+    .tableRow > div {
+        display: table-cell;
+        width: 4.5vw;
+        height: 4.5vw;
+    }
+
+.WSquare {
+    background: rgb(222, 222, 222);
+}
+
+.BSquare {
+    background: rgb(107, 86, 60);
+}
+
+.piece {
+    display: inline-flex;
+    width: 4.5vw;
+    height: 4.5vw;
+}
+/* Black pieces */
+#BR {
+    background: url("../pieces/BRook.png");
+    background-size: cover;
+    background-position: right top;
+}
+
+#BP {
+    background: url("../pieces/BPawn.png");
+    background-size: cover;
+    background-position: right top;
+}
+
+#BB {
+    background: url("../pieces/BBishop.png");
+    background-size: cover;
+    background-position: right top;
+}
+
+#BKn {
+    background: url("../pieces/BKnight.png");
+    background-size: cover;
+    background-position: right top;
+}
+
+#BQ {
+    background: url("../pieces/BQueen.png");
+    background-size: cover;
+    background-position: right top;
+}
+
+#BK {
+    background: url("../pieces/BKing.png");
+    background-size: cover;
+    background-position: right top;
+}
+/* White pieces */
+#WR {
+    background: url("../pieces/WRook.png");
+    background-size: cover;
+    background-position: right top;
+}
+
+#WP {
+    background: url("../pieces/WPawn.png");
+    background-size: cover;
+    background-position: right top;
+}
+
+#WB {
+    background: url("../pieces/WBishop.png");
+    background-size: cover;
+    background-position: right top;
+}
+
+#WKn {
+    background: url("../pieces/WKnight.png");
+    background-size: cover;
+    background-position: right top;
+}
+
+#WQ {
+    background: url("../pieces/WQueen.png");
+    background-size: cover;
+    background-position: right top;
+}
+
+#WK {
+    background: url("../pieces/WKing.png");
+    background-size: cover;
+    background-position: right top;
+}

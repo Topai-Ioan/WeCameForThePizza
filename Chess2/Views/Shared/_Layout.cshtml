@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ChessApp</title>
+    <title>@ViewData["Title"] - Chess</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/ChessApp.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Chess.styles.css" asp-append-version="true" />
 	<link rel="stylesheet" href="~/css/chess.css">
     <script type="text/javascript" src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js'></script>
 </head>
@@ -31,7 +31,6 @@
                         </li>
                     </ul>
                 </div>
-                
             </div>
         </nav>
     </header>
@@ -43,15 +42,15 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - ChessApp
+            &copy; 2022 - Chess
         </div>
     </footer>
 
     <script src="~/js/chess.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
-    <script src="~/js/site.min.js" asp-append-version="true"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

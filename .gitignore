@@ -13,7 +13,6 @@ bin/
 
 # Visual Studio files
 .vs/
-*.sln
 *.suo
 *.user
 *.vshost.*

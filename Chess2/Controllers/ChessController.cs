@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace Chess.Controllers
 {
-    public class GameController : Controller
+    public class ChessController : Controller
     {
         static List<Models.ChessMatch> _MatchList = new();
         static int _MatchCounter = 1;

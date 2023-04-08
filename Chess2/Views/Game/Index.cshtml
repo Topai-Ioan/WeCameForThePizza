@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Chess Game";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    var httpContext = HttpContextAccessor.HttpContext;
+    if (!httpContext.User.Identity.IsAuthenticated)
+    {
+        httpContext.Response.Redirect("/Identity/Account/Login?returnUrl=" + httpContext.Request.Path);
+        return;
+    }
+}
+
+
+
+
+
+@section Scripts {
+    <script src="~/js/game.js"></script>
+}
